@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "RfVcYTdCxWpcbwFJoZs/rYhEWySzpvu0UEFJTdNZcTyFjWbT/9hTk+CCD5yn4wd3PITD4opPDfb5pSOPk+yv7w==",
+  "dgSpecHash": "vbEHD/wyeTMjSB9PLNltcFsS0SlRjzvwDkdpU9baYMoqy4XvwfZio4927ertx7R6HfeQvnO0hxmxAKAFLfwJmg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hyman\\Source\\MonoGameNezTest\\MonoGameNezTest\\MonoGameNezTest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\hyman\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\hyman\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\hyman\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\hyman\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512",
+    "C:\\Users\\hyman\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
     "C:\\Users\\hyman\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512",
     "C:\\Users\\hyman\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
     "C:\\Users\\hyman\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
