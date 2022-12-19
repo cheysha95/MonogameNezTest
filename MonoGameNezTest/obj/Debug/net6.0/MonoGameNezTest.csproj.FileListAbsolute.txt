@@ -23,3 +23,10 @@ C:\Users\hyman\Source\MonoGameNezTest\MonoGameNezTest\obj\Debug\net6.0\refint\Mo
 C:\Users\hyman\Source\MonoGameNezTest\MonoGameNezTest\obj\Debug\net6.0\MonoGameNezTest.pdb
 C:\Users\hyman\Source\MonoGameNezTest\MonoGameNezTest\obj\Debug\net6.0\MonoGameNezTest.genruntimeconfig.cache
 C:\Users\hyman\Source\MonoGameNezTest\MonoGameNezTest\obj\Debug\net6.0\ref\MonoGameNezTest.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Nez.dll
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Nez.pdb
