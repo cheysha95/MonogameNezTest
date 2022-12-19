@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameNezTest", "MonoGameNezTest\MonoGameNezTest.csproj", "{0BED3E44-C964-40F6-B818-F0AC16C1F9CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nez.MG38", "..\Nez\Nez.Portable\Nez.MG38.csproj", "{CE448E36-0304-450E-99D8-E8A19D44CFDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BED3E44-C964-40F6-B818-F0AC16C1F9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BED3E44-C964-40F6-B818-F0AC16C1F9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BED3E44-C964-40F6-B818-F0AC16C1F9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BED3E44-C964-40F6-B818-F0AC16C1F9CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE448E36-0304-450E-99D8-E8A19D44CFDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE448E36-0304-450E-99D8-E8A19D44CFDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE448E36-0304-450E-99D8-E8A19D44CFDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE448E36-0304-450E-99D8-E8A19D44CFDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
