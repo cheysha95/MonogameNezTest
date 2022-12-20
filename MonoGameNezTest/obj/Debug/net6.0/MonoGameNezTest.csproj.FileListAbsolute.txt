@@ -33,3 +33,4 @@ C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Nez.pdb
 C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Content\Images\link_spriteSheet.xnb
 C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Content\Images\NPC.xnb
 C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Content\Images\Oracle_TilesetA.xnb
+C:\Users\hyman\Source\MonogameNezTest\MonoGameNezTest\bin\Debug\net6.0\Content\Images\npcs_red.xnb

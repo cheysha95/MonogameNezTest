@@ -6,9 +6,11 @@
   <SourceFiles>
     <File>C:/Users/hyman/Source/MonogameNezTest/MonoGameNezTest/Content/Images/link_spriteSheet.png</File>
     <File>C:/Users/hyman/Source/MonogameNezTest/MonoGameNezTest/Content/Images/NPC.png</File>
+    <File>C:/Users/hyman/Source/MonogameNezTest/MonoGameNezTest/Content/Images/npcs_red.png</File>
     <File>C:/Users/hyman/Source/MonogameNezTest/MonoGameNezTest/Content/Images/Oracle_TilesetA.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

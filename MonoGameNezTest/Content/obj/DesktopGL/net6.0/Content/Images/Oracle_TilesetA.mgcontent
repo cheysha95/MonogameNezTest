@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/hyman/Source/MonoGameNezTest/MonoGameNezTest/Content/Images/Oracle_TilesetA.png</SourceFile>
+  <SourceFile>C:/Users/hyman/Source/MonogameNezTest/MonoGameNezTest/Content/Images/Oracle_TilesetA.png</SourceFile>
   <SourceTime>2022-12-16T07:48:47.1381721-06:00</SourceTime>
-  <DestFile>C:/Users/hyman/Source/MonoGameNezTest/MonoGameNezTest/Content/bin/DesktopGL/Content/Images/Oracle_TilesetA.xnb</DestFile>
-  <DestTime>2022-12-19T15:03:57.9604023-06:00</DestTime>
+  <DestFile>C:/Users/hyman/Source/MonogameNezTest/MonoGameNezTest/Content/bin/DesktopGL/Content/Images/Oracle_TilesetA.xnb</DestFile>
+  <DestTime>2022-12-20T04:46:42.2394318-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T06:44:56-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
