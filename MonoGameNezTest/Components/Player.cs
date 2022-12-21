@@ -15,8 +15,8 @@ using System.Threading.Tasks;
 
 namespace MonoGameNezTest
 {
-    public enum PlayerState { Idle, Walking, Attacking, KnockedBack }
-    public class Player : SimpleStateMachine<PlayerState>, IUpdatable
+
+    public class Player : Component, IUpdatable
     {
         Direction CurrentDirection = Direction.Down;
 
@@ -25,15 +25,10 @@ namespace MonoGameNezTest
 
         Mover mover;
         FollowCamera followCamera;
-        TiledMapMover mapMover;
  
         SpriteAnimator animator;
-        CircleCollider Ccollider;
+        CircleCollider Collider;
         string animation = "walkingLeft";
-
-        void Walking_Enter(){  }
-        void Walking_Tick() { }
-        void Idle_Enter() { }
 
         public Player() { }
 
@@ -45,15 +40,16 @@ namespace MonoGameNezTest
             mover = Entity.AddComponent<Mover>(new Mover()); // 
             animator = Entity.AddComponent<SpriteAnimator>(); // dont know why this doesnt need new
 
-            Ccollider = Entity.AddComponent<CircleCollider>();
-            Ccollider.Radius = 6; // circle collider = way better;
+            Collider = Entity.AddComponent<CircleCollider>();
+            Collider.Radius = 5; // circle collider = way better;
+            Collider.SetLocalOffset(new Vector2(0,3));
 
             followCamera = Entity.AddComponent<FollowCamera>(new FollowCamera(Entity));
             followCamera.FollowLerp = 0.01f;
             followCamera.MapSize = new Vector2(400,800);
             followCamera.MapLockEnabled = true;
             //-----------------------------------------------------------------------------------------------------------
-            InitialState = PlayerState.Idle;
+
            
 
 
@@ -104,8 +100,7 @@ namespace MonoGameNezTest
         }
         void move()
         {
-            if (moveDir == Vector2.Zero) { CurrentState = PlayerState.Idle; }
-            if (moveDir != Vector2.Zero) { moveDir.Normalize(); CurrentState = PlayerState.Walking; } // DONT FORGET TO NORMALIZE
+            if (moveDir != Vector2.Zero) { moveDir.Normalize(); } // DONT FORGET TO NORMALIZE
             var movement = moveDir * moveSpeed * Time.DeltaTime; // movement is vector2
           
             Entity.GetComponent<Mover>().Move(movement, out var res); // perfer moving th ecircle collider over map mover

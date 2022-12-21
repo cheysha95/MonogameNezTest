@@ -40,6 +40,8 @@ public class Game1 : Nez.Core
 
         var _tileset = Content.LoadTexture("Images\\Oracle_TilesetA");
 
+       
+
         //Map
         var map = Content.LoadTiledMap("Maps\\SimpleExtended.tmx");
         var MapEntity = testScene.CreateEntity("MapEntity");
