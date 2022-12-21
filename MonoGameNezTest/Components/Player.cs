@@ -18,16 +18,13 @@ namespace MonoGameNezTest
 
     public class Player : Component, IUpdatable
     {
-        Direction CurrentDirection = Direction.Down;
+        Mover mover;
+        FollowCamera followCamera;
+        SpriteAnimator animator;
+        CircleCollider Collider;
 
         Vector2 moveDir = Vector2.Zero;
         float moveSpeed = 60;
-
-        Mover mover;
-        FollowCamera followCamera;
- 
-        SpriteAnimator animator;
-        CircleCollider Collider;
         string animation = "walkingLeft";
 
         public Player() { }
@@ -78,7 +75,6 @@ namespace MonoGameNezTest
         {           
             handleInput();
             updateAnimation();
-
             move();
         }
 
@@ -95,17 +91,16 @@ namespace MonoGameNezTest
             //-------------------------------------------------------------
             if (Input.IsKeyDown(Keys.D)) { moveDir.X = 1; }
             if (Input.IsKeyReleased(Keys.D)) { moveDir.X = 0; }
-
-
         }
+
         void move()
         {
             if (moveDir != Vector2.Zero) { moveDir.Normalize(); } // DONT FORGET TO NORMALIZE
             var movement = moveDir * moveSpeed * Time.DeltaTime; // movement is vector2
           
-            Entity.GetComponent<Mover>().Move(movement, out var res); // perfer moving th ecircle collider over map mover
-            
+            Entity.GetComponent<Mover>().Move(movement, out var res); // perfer moving th ecircle collider over map mover          
         }
+
         void updateAnimation()
         {
             if (moveDir.X < 0) { animation = "walkingLeft"; }

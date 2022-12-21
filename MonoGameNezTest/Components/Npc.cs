@@ -8,22 +8,23 @@ using Nez.AI.FSM;
 
 namespace MonoGameNezTest
 {
-    internal class Npc : SimpleStateMachine<PlayerState>, IUpdatable 
+    internal class Npc : SimpleStateMachine<ActorState>, IUpdatable 
     {
+        Mover mover;
+        SpriteAnimator animator;
+        BoxCollider Collider;
+
         Direction direction = Direction.Down;
         Vector2 moveDir = Vector2.Zero;
         float moveSpeed = 60;
         string currentAnimation = "";
-        Mover mover;
 
-        SpriteAnimator animator;
-        BoxCollider Collider;
 
-        void Walking_Enter() { }
-        void Walking_Tick() { }
+        void Walking_Enter() {/* set animation to walking in direction */ UpdateAnimation(); }
+        void Walking_Tick() {/* move in direction */ move(); }
         void Walking_Exit() { }
 
-        void Idle_Enter() { }
+        void Idle_Enter() { /*set animation to idle*/ UpdateAnimation(); }
         void Idle_Tick() { }
         void Idle_Exit() { }
 
@@ -36,8 +37,9 @@ namespace MonoGameNezTest
             animator = Entity.AddComponent<SpriteAnimator>();
             Collider= Entity.AddComponent<BoxCollider>();
             mover = Entity.AddComponent<Mover>();
+         
 
-            InitialState = PlayerState.Walking;
+
 
             animator.AddAnimation("WalkingDown", new[] { sprites[31], sprites[32] }, fps: 2);
             animator.AddAnimation("IdleDown", new[] { sprites[31] }, fps: 2);
@@ -51,12 +53,22 @@ namespace MonoGameNezTest
             animator.AddAnimation("WalkingLeft", new[] { sprites[29], sprites[30] }, fps: 2);
             animator.AddAnimation("IdleLeft", new[] { sprites[30] }, fps: 2);
 
+            InitialState = ActorState.Walking;
+
+
+
+
         }
 
         public override void Update()
         {
             UpdateAnimation();
-            move();
+            //move();
+            //UpdateState();
+
+
+            base.Update(); // allows for the state machine tick to work
+       
         } 
 
         void UpdateAnimation()
@@ -64,21 +76,24 @@ namespace MonoGameNezTest
             currentAnimation = CurrentState.ToString() + direction.ToString();
 
             if (animator.CurrentAnimationName != currentAnimation ) { animator.Play(currentAnimation); }
-
-            if (moveDir.X < 0) { direction = Direction.Left; }
-            else if (moveDir.X > 0) { direction = Direction.Right; }
-            if (moveDir.Y < 0) { direction = Direction.Up; }
-            else if (moveDir.Y > 0) { direction = Direction.Down; }
-
         }
 
-        void move()
+        void UpdateState() 
         {
-            if (moveDir == Vector2.Zero) { CurrentState = PlayerState.Idle; }
-            if (moveDir != Vector2.Zero) { moveDir.Normalize(); CurrentState = PlayerState.Walking; }
+            if (moveDir.X > 0 || moveDir.Y > 0) { CurrentState = ActorState.Walking; } 
+        }
 
+        void move() // goal is to have moveDir be completly controlled by the state
+        {
+            //if (moveDir == Vector2.Zero) { CurrentState = ActorState.Idle; }
+
+            if (direction == Direction.Left && CurrentState == ActorState.Walking) { moveDir.X = -1; }
+            if (direction == Direction.Right && CurrentState == ActorState.Walking) { moveDir.X = 1; }
+            if (direction == Direction.Up && CurrentState == ActorState.Walking) { moveDir.Y = -1; }
+            if (direction == Direction.Down && CurrentState == ActorState.Walking) { moveDir.Y = 1; }
+
+            if (moveDir != Vector2.Zero) { moveDir.Normalize(); CurrentState = ActorState.Walking; } // normalize
             var movement = moveDir * moveSpeed * Time.DeltaTime;
-
            mover.Move(movement, out var res); 
         }
 

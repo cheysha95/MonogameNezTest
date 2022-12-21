@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonoGameNezTest
 {
-    public enum PlayerState { Idle, Walking, Attacking, KnockedBack }
+    public enum ActorState { Idle, Walking, Attacking, KnockedBack }
 
 
 
