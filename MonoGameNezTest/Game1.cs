@@ -12,24 +12,14 @@ public enum Direction { Up, Down, Left, Right}
 public class Game1 : Nez.Core
 {
 
-    public Game1() : base()
-    {
-
-    }
+    public Game1() : base() { }
 
     protected override void Initialize()
     {
 
-        // TODO: Add your initialization logic here
         base.Initialize();
         var testScene = new Scene();
         Core.Scene = testScene;
-
-        //Debug render service
-       // Core.Services.AddService<Batcher>(new Batcher(GraphicsDevice));
-        //Core.Services.GetService<Batcher>().Begin();
-
-
 
         // set screen size hohoho this zooms
         Scene.SetDesignResolution(400, 400, Scene.SceneResolutionPolicy.ShowAllPixelPerfect); // amount of rendertarget you want to show
@@ -40,7 +30,6 @@ public class Game1 : Nez.Core
 
         var _tileset = Content.LoadTexture("Images\\Oracle_TilesetA");
 
-       
 
         //Map
         var map = Content.LoadTiledMap("Maps\\SimpleExtended.tmx");
@@ -49,17 +38,19 @@ public class Game1 : Nez.Core
         MapEntity.GetComponent<TiledMapRenderer>().RenderLayer = 1;
         
 
-
-
         //Player
         var PlayerEntity = testScene.CreateEntity("PlayerEntity",new Vector2(10,10));
         PlayerEntity.AddComponent<Player>(new Player());
 
         //NPC
         var testNpc = testScene.CreateEntity("NPC", new Vector2(300,100));
-        testNpc.AddComponent<Npc>(new Npc());
-         
-    
+        testNpc.AddComponent<Actor>(new Actor());
+        
+        //Enemy
+        var testEnemy = testScene.CreateEntity("testEnemy", new Vector2(30, 100));
+        testEnemy.AddComponent(new Enemy());
+
+
 
 
 
