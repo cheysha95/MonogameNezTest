@@ -23,16 +23,20 @@ public class Player : Actor
     public CircleCollider Collider;
 
     public TextComponent debugText;
+
+    public Item debugItem;
     
     public override void OnAddedToEntity()
     {
         base.OnAddedToEntity();
+        
         moveSpeed = 80;
         var texture = Entity.Scene.Content.LoadTexture("Images\\player");
         var sprites = Sprite.SpritesFromAtlasGap(texture,16,16,cellOffset: 10); //lmao it worked perfect
 
         Entity.RemoveComponent<BoxCollider>();
-        Entity.RemoveComponent<SpriteAnimator>(); // comback here
+        Entity.RemoveComponent<SpriteAnimator>(); 
+        
         animator = Entity.AddComponent<SpriteAnimator>();
         Collider = Entity.AddComponent<CircleCollider>();
         Collider.Radius = 5; // circle collider = way better;
@@ -44,7 +48,9 @@ public class Player : Actor
         //-------------------------------------------------------------------------
         
         
-        Entity.AddComponent<Item>(new Item());
+        debugItem = Entity.AddComponent<Item>(new Item());
+        
+        
         debugText = Entity.AddComponent<TextComponent>(new TextComponent());
         debugText.Color = Color.Black;
         debugText.LocalOffset = new Vector2(0, 20);

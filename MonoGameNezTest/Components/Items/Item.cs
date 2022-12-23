@@ -24,19 +24,21 @@ public class Item : SimpleStateMachine<ItemState>
     private TextComponent debugText;
     private float counter;
     
-    public void Inactive_Enter() { debugText.Enabled = false; } 
+    public void Inactive_Enter() {  debugText.Text = CurrentState.ToString(); } 
     public void Inactive_Tick() {}
     public void Inactive_Exit() {}
     
-    public void Active_Enter() { debugText.Enabled = true; float counter = 0; }
+    public void Active_Enter() { float counter ; debugText.Text = CurrentState.ToString() ; }
 
     public void Active_Tick()
     {
-        
-        if (counter < 1) { debugText.Text = counter.ToString(); counter =+ Time.DeltaTime; }
-
+        if ((int)counter <= 1) //seconds
+        {
+            counter = counter + Time.DeltaTime;
+            if ((int)counter == 1) { CurrentState = ItemState.Inactive; }
+        }
     }
-    public void Active_Exit() {}
+    public void Active_Exit() {counter = 0;}
 
     public Item () : base() {}  // blank constructor
 
@@ -49,7 +51,6 @@ public class Item : SimpleStateMachine<ItemState>
         //PUT SAPRITE HERE
         
         debugText = Entity.AddComponent<TextComponent>(new TextComponent());
-        debugText.Text = "Hello, World!";
 
         InitialState = ItemState.Inactive;
 
