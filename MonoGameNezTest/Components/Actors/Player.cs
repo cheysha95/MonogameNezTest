@@ -12,111 +12,106 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MonoGameNezTest.Components.Items;
+using Color = Microsoft.Xna.Framework.Color;
 
-namespace MonoGameNezTest
+namespace MonoGameNezTest;
+
+public class Player : Actor
 {
+    public FollowCamera followCamera;
+    public CircleCollider Collider;
 
-    public class Player : Component, IUpdatable
+    public TextComponent debugText;
+    
+    public override void OnAddedToEntity()
     {
-        Mover mover;
-        FollowCamera followCamera;
-        SpriteAnimator animator;
-        CircleCollider Collider;
+        base.OnAddedToEntity();
+        moveSpeed = 80;
+        var texture = Entity.Scene.Content.LoadTexture("Images\\player");
+        var sprites = Sprite.SpritesFromAtlasGap(texture,16,16,cellOffset: 10); //lmao it worked perfect
 
-        Vector2 moveDir = Vector2.Zero;
-        float moveSpeed = 60;
-        string animation = "walkingLeft";
+        Entity.RemoveComponent<BoxCollider>();
+        Entity.RemoveComponent<SpriteAnimator>(); // comback here
+        animator = Entity.AddComponent<SpriteAnimator>();
+        Collider = Entity.AddComponent<CircleCollider>();
+        Collider.Radius = 5; // circle collider = way better;
+        
+        followCamera = Entity.AddComponent<FollowCamera>(new FollowCamera(Entity));
+        followCamera.FollowLerp = 0.01f;
+        followCamera.MapSize = new Vector2(400,800);
+        followCamera.MapLockEnabled = true;
+        //-------------------------------------------------------------------------
+        
+        
+        Entity.AddComponent<Item>(new Item());
+        debugText = Entity.AddComponent<TextComponent>(new TextComponent());
+        debugText.Color = Color.Black;
+        debugText.LocalOffset = new Vector2(0, 20);
 
-        public Player() { }
-
-        public override void OnAddedToEntity() // MUST OVERRIDE, load ontent here
-        {
-            var texture = Entity.Scene.Content.LoadTexture("Images\\link_spriteSheet");
-            var sprites = Sprite.SpritesFromAtlas(texture,16,16);
-
-            mover = Entity.AddComponent<Mover>(new Mover()); // 
-            animator = Entity.AddComponent<SpriteAnimator>(); // dont know why this doesnt need new
-
-            Collider = Entity.AddComponent<CircleCollider>();
-            Collider.Radius = 5; // circle collider = way better;
-            Collider.SetLocalOffset(new Vector2(0,3));
-
-            followCamera = Entity.AddComponent<FollowCamera>(new FollowCamera(Entity));
-            followCamera.FollowLerp = 0.01f;
-            followCamera.MapSize = new Vector2(400,800);
-            followCamera.MapLockEnabled = true;
-            //-----------------------------------------------------------------------------------------------------------
-
-           
-
-
-
-
-
-
-
-
-            //add animations
-            animator.AddAnimation("walkingRight", new[] { sprites[0],sprites[1] });
-            animator.AddAnimation("idleRight", new[] { sprites[0]});
-            //----
-            animator.AddAnimation("walkingLeft", new[] { sprites[4], sprites[5] });
-            animator.AddAnimation("idleLeft", new[] { sprites[4] });
-            //-----
-            animator.AddAnimation("walkingUp", new[] { sprites[2], sprites[3] });
-            animator.AddAnimation("idleUp", new[] { sprites[2] });
-            //--------
-            animator.AddAnimation("walkingDown", new[] { sprites[6], sprites[7] });
-            animator.AddAnimation("idleDown", new[] { sprites[6] });
-        }
-
-
-         void IUpdatable.Update() // DO THIS TO HAVE UPDATE CALLED
-        {           
-            handleInput();
-            updateAnimation();
-            move();
-        }
-
-        void handleInput()
-        {
-            if (Input.IsKeyDown(Keys.W)) { moveDir.Y = -1 ; }
-            if (Input.IsKeyReleased(Keys.W)) { moveDir.Y = 0;}
-            //-------------------------------------------------------------
-            if (Input.IsKeyDown(Keys.S)) { moveDir.Y = 1; }
-            if (Input.IsKeyReleased(Keys.S)) { moveDir.Y = 0; }
-            //----------------------------------------------------------------
-            if (Input.IsKeyDown(Keys.A)) { moveDir.X = -1; }
-            if (Input.IsKeyReleased(Keys.A)) { moveDir.X = 0; }
-            //-------------------------------------------------------------
-            if (Input.IsKeyDown(Keys.D)) { moveDir.X = 1; }
-            if (Input.IsKeyReleased(Keys.D)) { moveDir.X = 0; }
-        }
-
-        void move()
-        {
-            if (moveDir != Vector2.Zero) { moveDir.Normalize(); } // DONT FORGET TO NORMALIZE
-            var movement = moveDir * moveSpeed * Time.DeltaTime; // movement is vector2
-          
-            Entity.GetComponent<Mover>().Move(movement, out var res); // perfer moving th ecircle collider over map mover          
-        }
-
-        void updateAnimation()
-        {
-            if (moveDir.X < 0) { animation = "walkingLeft"; }
-            else if (moveDir.X > 0) { animation = "walkingRight"; }
-            if (moveDir.Y < 0) { animation = "walkingUp"; }
-            else if (moveDir.Y > 0) { animation = "walkingDown"; }
-
-            // play animation if moving, pause if not
-            if (moveDir != Vector2.Zero)
-            {
-                if (!animator.IsAnimationActive(animation)) { animator.Play(animation); }
-                else { animator.UnPause(); }
-            }
-            else { animator.Pause(); }
-        }
-
-
+        #region addAnimations
+        animator.AddAnimation("WalkingRight", new[] { sprites[0],sprites[1] });
+        animator.AddAnimation("IdleRight", new[] { sprites[0]});
+        //----
+        animator.AddAnimation("WalkingLeft", new[] { sprites[4], sprites[5] });
+        animator.AddAnimation("IdleLeft", new[] { sprites[4] });
+        //-----
+        animator.AddAnimation("WalkingUp", new[] { sprites[2], sprites[3] });
+        animator.AddAnimation("IdleUp", new[] { sprites[2] });
+        //--------
+        animator.AddAnimation("WalkingDown", new[] { sprites[6], sprites[7] });
+        animator.AddAnimation("IdleDown", new[] { sprites[6] });
+        animator.AddAnimation("AttackingDown", new[] { sprites[6]});
+        
+        
+        animator.AddAnimation("debug", new[] { sprites[1], sprites[2]});
+        #endregion
+        
+        
+        
+        
     }
+
+    public override void Update()
+    {
+        handleInput();
+        base.Update();
+        
+        
+        if (moveDir == Vector2.Zero) {CurrentState = ActorState.Idle;}
+        if (moveDir != Vector2.Zero) {CurrentState = ActorState.Walking;}
+        
+        
+        debugText.Text = CurrentState.ToString() + facingDirection.ToString() ;
+    }
+    
+
+    void handleInput()
+    {
+        if (Input.IsKeyDown(Keys.W)) { moveDir.Y = -1 ; facingDirection = Direction.Up; }
+        if (Input.IsKeyReleased(Keys.W)) { moveDir.Y = 0; }
+        //-------------------------------------------------------------
+        if (Input.IsKeyDown(Keys.S)) { moveDir.Y = 1; facingDirection = Direction.Down; }
+        if (Input.IsKeyReleased(Keys.S)) { moveDir.Y = 0; }
+        //----------------------------------------------------------------
+        if (Input.IsKeyDown(Keys.A)) { moveDir.X = -1; facingDirection = Direction.Left;}
+        if (Input.IsKeyReleased(Keys.A)) { moveDir.X = 0; }
+        //-------------------------------------------------------------
+        if (Input.IsKeyDown(Keys.D)) { moveDir.X = 1; facingDirection = Direction.Right;}
+        if (Input.IsKeyReleased(Keys.D)) { moveDir.X = 0; }
+        //-----------------------------------------------------------------------------
+       // if (moveDir == Vector2.Zero) {CurrentState = ActorState.Idle;} // amybe this shouldnt be here, maybe enter and exits 
+
+        
+        if (Input.IsKeyPressed(Keys.Space))
+        { Entity.GetComponent<Item>().useItem(); }
+        
+        
+     
+       // if (moveDir != Vector2.Zero) {CurrentState = ActorState.Walking;}
+        
+        
+    }
+
+    
 }

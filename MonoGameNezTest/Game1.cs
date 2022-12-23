@@ -40,14 +40,15 @@ public class Game1 : Nez.Core
 
         //Player
         var PlayerEntity = testScene.CreateEntity("PlayerEntity",new Vector2(10,10));
+        //PlayerEntity.AddComponent<Player>(new Player());
         PlayerEntity.AddComponent<Player>(new Player());
 
         //NPC
         var testNpc = testScene.CreateEntity("NPC", new Vector2(300,100));
-        testNpc.AddComponent<Actor>(new Actor());
+        testNpc.AddComponent<Actor>(new Npc());
         
         //Enemy
-        var testEnemy = testScene.CreateEntity("testEnemy", new Vector2(30, 100));
+        var testEnemy = testScene.CreateEntity("testEnemy", new Vector2(350, 100));
         testEnemy.AddComponent(new Enemy());
 
 
